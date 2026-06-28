@@ -1,5 +1,6 @@
 using ApiStudio.Application.Common.Interfaces;
 using ApiStudio.Application.Workspaces.Commands;
+using ApiStudio.HttpEngine;
 using ApiStudio.Persistence;
 using Microsoft.EntityFrameworkCore;
 using FluentValidation;
@@ -32,7 +33,7 @@ builder.Services.AddMediatR(cfg =>
     cfg.RegisterServicesFromAssembly(typeof(CreateWorkspaceCommand).Assembly);
 });
 
-//builder.Services.AddHttpEngine();
+builder.Services.AddHttpEngine();
 
 var app = builder.Build();
 

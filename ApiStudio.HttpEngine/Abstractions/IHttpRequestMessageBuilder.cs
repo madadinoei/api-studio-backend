@@ -1,4 +1,4 @@
-﻿using ApiStudio.HttpEngine.Models;
+﻿using ApiStudio.HttpEngine.Abstractions.Models;
 
 namespace ApiStudio.HttpEngine.Abstractions;
 

@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ApiStudio.Domain\ApiStudio.Domain.csproj" />
+    <ProjectReference Include="..\ApiStudio.HttpEngine.Abstractions\ApiStudio.HttpEngine.Abstractions.csproj" />
   </ItemGroup>
 
   <PropertyGroup>
