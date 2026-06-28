@@ -7,7 +7,11 @@ public class Workspace : BaseEntity
     public string Name { get; private set; }
 
     public string? Description { get; private set; }
-    
+
+    private readonly List<Collection> _collections = new();
+
+    public IReadOnlyCollection<Collection> Collections => _collections;
+
 
     private Workspace()
     {
