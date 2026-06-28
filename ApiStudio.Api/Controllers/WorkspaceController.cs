@@ -1,5 +1,6 @@
 ﻿using ApiStudio.Api.Models.Requests.Workspaces;
 using ApiStudio.Application.Workspaces.Commands;
+using ApiStudio.Application.Workspaces.Queries.GetWorkspaceById;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -31,7 +32,11 @@ public class WorkspaceController : ControllerBase
     [HttpGet("{id:guid}")]
     public async Task<IActionResult> GetById(Guid id)
     {
-        // بعداً پیاده‌سازی می‌کنیم
-        return Ok();
+        var result = await _mediator.Send(new GetWorkspaceByIdQuery(id));
+
+        if (result is null)
+            return NotFound();
+
+        return Ok(result);
     }
 }
