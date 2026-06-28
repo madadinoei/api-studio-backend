@@ -50,16 +50,33 @@ public class ApiRequest : BaseEntity
     }
 
     public void AddHeader(RequestHeader header)
-        => _headers.Add(header);
+    {
+        _headers.Add(header);
+    }
 
     public void RemoveHeader(string name)
-        => _headers.RemoveAll(x => x.Name == name);
+    {
+        _headers.RemoveAll(x =>
+            x.Name.Equals(name, StringComparison.OrdinalIgnoreCase));
+    }
+
+    public void ReplaceHeaders(IEnumerable<RequestHeader> headers)
+    {
+        _headers.Clear();
+        _headers.AddRange(headers);
+    }
 
     public void AddQueryParameter(QueryParameter parameter)
         => _queryParameters.Add(parameter);
 
     public void RemoveQueryParameter(string name)
         => _queryParameters.RemoveAll(x => x.Name == name);
+
+    public void ReplaceQueryParameters(IEnumerable<QueryParameter> parameters)
+    {
+        _queryParameters.Clear();
+        _queryParameters.AddRange(parameters);
+    }
 
     public void SetBody(RequestBody body)
         => Body = body;
