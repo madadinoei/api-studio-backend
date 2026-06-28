@@ -13,6 +13,8 @@ public class ApplicationDbContext : DbContext, IApplicationDbContext
 
     public DbSet<Workspace> Workspaces => Set<Workspace>();
     public DbSet<Collection> Collections => Set<Collection>();
+    public DbSet<ApiRequest> ApiRequests => Set<ApiRequest>();
+
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

@@ -1,4 +1,6 @@
-﻿namespace ApiStudio.Domain.Entities;
+﻿using ApiStudio.Domain.Common;
+
+namespace ApiStudio.Domain.Entities;
 
 public class Collection : BaseEntity
 {

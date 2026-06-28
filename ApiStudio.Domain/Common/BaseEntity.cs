@@ -1,4 +1,4 @@
-﻿namespace ApiStudio.Domain;
+﻿namespace ApiStudio.Domain.Common;
 
 public abstract class BaseEntity
 {

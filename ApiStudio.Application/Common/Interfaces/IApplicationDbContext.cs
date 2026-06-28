@@ -7,6 +7,7 @@ public interface IApplicationDbContext
 {
     DbSet<Workspace> Workspaces { get; }
     DbSet<Domain.Entities.Collection> Collections { get; }
+    DbSet<ApiRequest> ApiRequests { get; }
 
 
     Task<int> SaveChangesAsync(CancellationToken cancellationToken);
