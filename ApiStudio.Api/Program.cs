@@ -31,6 +31,9 @@ builder.Services.AddMediatR(cfg =>
 {
     cfg.RegisterServicesFromAssembly(typeof(CreateWorkspaceCommand).Assembly);
 });
+
+//builder.Services.AddHttpEngine();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

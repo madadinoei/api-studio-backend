@@ -19,6 +19,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ApiStudio.Application\ApiStudio.Application.csproj" />
+    <ProjectReference Include="..\ApiStudio.HttpEngine\ApiStudio.HttpEngine.csproj" />
     <ProjectReference Include="..\ApiStudio.Infrastructure\ApiStudio.Infrastructure.csproj" />
     <ProjectReference Include="..\ApiStudio.Persistence\ApiStudio.Persistence.csproj" />
   </ItemGroup>
