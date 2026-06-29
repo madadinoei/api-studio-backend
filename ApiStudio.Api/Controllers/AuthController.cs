@@ -27,6 +27,6 @@ public class AuthController : ControllerBase
                 request.Password),
             cancellationToken);
 
-        return NoContent();
+        return Ok();
     }
 }
