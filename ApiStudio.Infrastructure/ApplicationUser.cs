@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 
-namespace ApiStudio.Persistence;
+namespace ApiStudio.Infrastructure;
 
 public sealed class ApplicationUser : IdentityUser<Guid>
 {

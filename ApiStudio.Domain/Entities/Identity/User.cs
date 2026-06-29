@@ -14,20 +14,28 @@ public class User : BaseEntity
     {
     }
 
-    public static User Create(
-        string userName,
+    public static User Create(string userName,
         string displayName,
-        string? email)
+        string? email, Guid identityUserId)
     {
-       ///
-       return new User();
+       return new User()
+       {
+           UserName = userName,
+           DisplayName = displayName,
+           Email = email,
+           CreatedAt = DateTime.Now,
+           Id = identityUserId,
+           UpdatedAt = null
+       };
     }
 
     public void UpdateProfile(
         string displayName,
         string? email)
     {
-       ///
+        this.DisplayName = displayName;
+        this.Email = email;
+        this.UpdatedAt= DateTime.Now;
 
     }
 }

@@ -1,6 +1,7 @@
 ﻿using ApiStudio.Application.Common.Interfaces;
 using ApiStudio.Domain.Entities;
 using ApiStudio.Domain.Entities.Identity;
+using ApiStudio.Infrastructure;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
@@ -19,6 +20,8 @@ public class ApplicationDbContext : IdentityDbContext<
     public DbSet<Workspace> Workspaces => Set<Workspace>();
     public DbSet<Collection> Collections => Set<Collection>();
     public DbSet<ApiRequest> ApiRequests => Set<ApiRequest>();
+
+    public DbSet<User> Users  => Set<User>();
 
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)

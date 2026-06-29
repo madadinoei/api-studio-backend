@@ -16,6 +16,7 @@
   <ItemGroup>
     <ProjectReference Include="..\ApiStudio.Application\ApiStudio.Application.csproj" />
     <ProjectReference Include="..\ApiStudio.Domain\ApiStudio.Domain.csproj" />
+    <ProjectReference Include="..\ApiStudio.Infrastructure\ApiStudio.Infrastructure.csproj" />
   </ItemGroup>
 
   <PropertyGroup>
