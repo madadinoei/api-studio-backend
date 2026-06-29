@@ -38,9 +38,9 @@ public sealed class SendApiRequestCommandHandler
 
         var executionRequest = Map(apiRequest);
 
-        return await _executor.ExecuteAsync(
-            executionRequest,
-            cancellationToken);
+        var response = await _executor.ExecuteAsync(executionRequest, cancellationToken);
+        return response;
+        
     }
 
     private static HttpExecutionRequest Map(ApiRequest request)
