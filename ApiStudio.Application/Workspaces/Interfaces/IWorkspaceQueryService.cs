@@ -8,5 +8,5 @@ public interface IWorkspaceQueryService
     Task<List<WorkspaceDto>> GetWorkspaceListQuery();
     Task<WorkspaceDto?> GetByIdAsync(Guid id);
 
-    Task<List<CollectionDto>> GetWorkspaceCollectionsAsync(Guid id);
+    Task<List<CollectionTreeDto>> GetWorkspaceCollectionsAsync(Guid id);
 }

@@ -10,6 +10,7 @@ public interface IApplicationDbContext
     DbSet<Domain.Entities.Collection> Collections { get; }
     DbSet<ApiRequest> ApiRequests { get; }
     DbSet<User> Users { get; }
+    DbSet<Folder> Folders { get; }
 
 
     Task<int> SaveChangesAsync(CancellationToken cancellationToken);

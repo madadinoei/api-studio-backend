@@ -1,4 +1,5 @@
 ﻿using ApiStudio.Application.Common.Interfaces;
+using ApiStudio.Domain.Entities;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
@@ -20,7 +21,6 @@ public sealed class CreateFolderCommandHandler
         CancellationToken cancellationToken)
     {
         var collection = await _context.Collections
-            .Include(x => x.Folders)
             .FirstOrDefaultAsync(
                 x => x.Id == request.CollectionId,
                 cancellationToken);
@@ -28,17 +28,18 @@ public sealed class CreateFolderCommandHandler
         if (collection is null)
             throw new Exception("Collection not found.");
 
-        if (request.ParentFolderId.HasValue && collection.Folders.All(f => f.Id != request.ParentFolderId))
+        if (request.ParentFolderId.HasValue && !_context.Folders.Where(x => x.CollectionId == collection.Id).Any(f => f.Id == request.ParentFolderId))
         {
             throw new Exception("Parent folder not found.");
         }
 
-        var folder = collection.AddFolder(
-            request.Name,
-            request.ParentFolderId);
+        //var folder = collection.AddFolder(
+        //    request.Name,
+        //    request.ParentFolderId);
+        var folder = await _context.Folders.AddAsync(Folder.Create(collection.Id, request.Name, request.ParentFolderId), cancellationToken);
 
         await _context.SaveChangesAsync(cancellationToken);
 
-        return folder.Id;
+        return folder.Entity.Id;
     }
 }

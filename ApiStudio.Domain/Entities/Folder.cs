@@ -17,6 +17,8 @@ public sealed class Folder : BaseEntity
         CollectionId = collectionId;
         Name = name;
         ParentFolderId = parentFolderId;
+        CreatedAt=DateTime.Now;
+        UpdatedAt = null;
     }
 
     public Guid CollectionId { get; private set; }
@@ -25,12 +27,15 @@ public sealed class Folder : BaseEntity
 
     public string Name { get; private set; }
 
+
+    public Collection Collection { get; private set; } = default!;
+
     public static Folder Create(
         Guid collectionId,
         string name,
         Guid? parentFolderId)
     {
-        return new(
+        return new Folder(
             collectionId,
             name,
             parentFolderId);

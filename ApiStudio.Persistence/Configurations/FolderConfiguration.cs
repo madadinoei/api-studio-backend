@@ -33,11 +33,6 @@ public sealed class FolderConfiguration
             x.Name
         });
 
-        builder.HasOne<Collection>()
-            .WithMany(x => x.Folders)
-            .HasForeignKey(x => x.CollectionId)
-            .OnDelete(DeleteBehavior.Cascade);
-
         builder.HasOne<Folder>()
             .WithMany()
             .HasForeignKey(x => x.ParentFolderId)

@@ -75,7 +75,8 @@ void AddDatabaseContext(WebApplicationBuilder webApplicationBuilder)
     webApplicationBuilder.Services.AddDbContext<ApplicationDbContext>(options =>
     {
         options.UseSqlServer(
-            webApplicationBuilder.Configuration.GetConnectionString("DefaultConnection"));
+            webApplicationBuilder.Configuration.GetConnectionString("DefaultConnection")).EnableSensitiveDataLogging()
+            .LogTo(Console.WriteLine, LogLevel.Information); ;
     });
     webApplicationBuilder.Services
         .AddIdentity<ApplicationUser, ApplicationRole>()
