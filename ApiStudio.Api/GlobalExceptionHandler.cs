@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Diagnostics;
+﻿using ApiStudio.Infrastructure.Exceptions;
+using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ApiStudio.Api;
@@ -21,25 +22,31 @@ public sealed class GlobalExceptionHandler : IExceptionHandler
 
         var problem = exception switch
         {
+            InvalidCredentialsException => new ProblemDetails
+            {
+                Status = StatusCodes.Status401Unauthorized,
+                Title = "دسترسی مجاز نیست",
+                Detail = exception.Message
+            },
             UnauthorizedAccessException => new ProblemDetails
             {
                 Status = StatusCodes.Status401Unauthorized,
-                Title = "Unauthorized",
-                Detail = "Invalid username or password."
+                Title = "دسترسی مجاز نیست",
+                Detail = "دسترسی شما به این سرویس مجاز نیست"
             },
 
             ArgumentException => new ProblemDetails
             {
                 Status = StatusCodes.Status400BadRequest,
-                Title = "Bad Request",
+                Title = "درخواست ناصحیح",
                 Detail = exception.Message
             },
 
             _ => new ProblemDetails
             {
                 Status = StatusCodes.Status500InternalServerError,
-                Title = "Server Error",
-                Detail = "An unexpected error occurred."
+                Title = "خطای داخلی",
+                Detail = "خطای داخلی رخ داده است"
             }
         };
 

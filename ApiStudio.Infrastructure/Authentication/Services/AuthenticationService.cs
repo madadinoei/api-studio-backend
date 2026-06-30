@@ -1,5 +1,6 @@
 ﻿using ApiStudio.Application.Authentication.Dtos;
 using ApiStudio.Application.Authentication.Interfaces;
+using ApiStudio.Infrastructure.Exceptions;
 
 namespace ApiStudio.Infrastructure.Authentication.Services;
 
@@ -32,7 +33,7 @@ public sealed class AuthenticationService
                 cancellationToken);
 
         if (externalUser is null)
-            throw new UnauthorizedAccessException();
+            throw new InvalidCredentialsException();
 
         var identityUserId =
             await _provisioningService.ProvisionAsync(
