@@ -15,6 +15,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
+using ApiStudio.Api;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -30,6 +31,10 @@ builder.Services.AddMediatR(cfg =>
 
 
 builder.Services.AddValidatorsFromAssembly(typeof(CreateWorkspaceValidator).Assembly);
+
+
+builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
+builder.Services.AddProblemDetails();
 
 builder.Services.AddControllers();
 
@@ -57,6 +62,7 @@ if (app.Environment.IsDevelopment())
 app.MapControllers();
 app.UseHttpsRedirection();
 app.UseCors("AllowFrontend");
+app.UseExceptionHandler();
 app.UseAuthentication();
 
 app.UseAuthorization();
