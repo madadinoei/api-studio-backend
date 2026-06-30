@@ -24,10 +24,9 @@ public class ApiRequestController : ControllerBase
         Guid collectionId,
         CreateApiRequestRequest request)
     {
-        Console.WriteLine(HttpContext);
         var id = await _mediator.Send(
             new CreateApiRequestCommand(
-                collectionId,
+                collectionId,request.FolderId,
                 request.Name,
                 request.Endpoint,
                 request.Method,request.RequestBodyDto,request.Headers,request.QueryParameters));

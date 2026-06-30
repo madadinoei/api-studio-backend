@@ -24,7 +24,7 @@ public class CreateCollectionHandler
         if (!workspace)
             throw new Exception("Workspace not found.");
 
-        var collection = new Domain.Entities.Collection(
+        var collection = Domain.Entities.Collection.Create(
             request.WorkspaceId,
             request.Name,
             request.Description);

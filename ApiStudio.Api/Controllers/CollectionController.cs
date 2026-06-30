@@ -38,4 +38,21 @@ public class CollectionController : ControllerBase
 
         return Ok();
     }
+
+
+    [HttpPost("{collectionId:guid}/folders")]
+    public async Task<ActionResult<Guid>> CreateFolder(
+        Guid collectionId,
+        CreateFolderRequest request,
+        CancellationToken cancellationToken)
+    {
+        var id = await _mediator.Send(
+            new CreateFolderCommand(
+                collectionId,
+                request.ParentFolderId,
+                request.Name),
+            cancellationToken);
+
+        return Ok(id);
+    }
 }

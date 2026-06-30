@@ -14,6 +14,7 @@ public class ApiRequest : BaseEntity
     }
 
     public Guid CollectionId { get; private set; }
+    public Guid? FolderId { get; private set; }
 
     public string Name { get; private set; } = default!;
 
@@ -32,7 +33,7 @@ public class ApiRequest : BaseEntity
     public Collection Collection { get; private set; } = default!;
 
     public static ApiRequest Create(
-        Guid collectionId,
+        Guid collectionId,Guid? folderId,
         string name,
         HttpMethodType method,
         Endpoint endpoint)
@@ -41,6 +42,7 @@ public class ApiRequest : BaseEntity
         {
             Id = Guid.NewGuid(),
             CollectionId = collectionId,
+            FolderId = folderId,
             Name = name,
             Method = method,
             Endpoint = endpoint,

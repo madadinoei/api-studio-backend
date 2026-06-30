@@ -6,6 +6,7 @@ namespace ApiStudio.Application.ApiRequests.Commands.CreateApiRequest;
 
 public sealed record CreateApiRequestCommand(
     Guid CollectionId,
+    Guid? FolderId,
     string Name,
     string Endpoint,
     HttpMethodType Method,

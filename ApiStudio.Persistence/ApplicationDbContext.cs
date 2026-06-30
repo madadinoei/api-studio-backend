@@ -20,6 +20,7 @@ public class ApplicationDbContext : IdentityDbContext<
     public DbSet<Workspace> Workspaces => Set<Workspace>();
     public DbSet<Collection> Collections => Set<Collection>();
     public DbSet<ApiRequest> ApiRequests => Set<ApiRequest>();
+    public DbSet<Folder> Folders => Set<Folder>();
 
     public DbSet<User> Users  => Set<User>();
 

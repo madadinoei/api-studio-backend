@@ -27,7 +27,7 @@ public sealed class CreateApiRequestCommandHandler
             throw new KeyNotFoundException("Collection not found.");
 
         var apiRequest = ApiRequest.Create(
-            request.CollectionId,
+            request.CollectionId,request.FolderId,
             request.Name,
             request.Method,
             Endpoint.Create(request.Endpoint));
