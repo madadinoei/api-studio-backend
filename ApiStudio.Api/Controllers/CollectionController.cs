@@ -1,8 +1,5 @@
 ﻿using ApiStudio.Api.Models.Requests.Collections;
-using ApiStudio.Api.Models.Requests.Workspaces;
 using ApiStudio.Application.Collection.Commands;
-using ApiStudio.Application.Workspaces.Commands;
-using ApiStudio.Application.Workspaces.Queries.GetWorkspaceById;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 

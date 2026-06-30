@@ -1,7 +1,6 @@
 ﻿using ApiStudio.Api.Models.Requests.ProvisionUser;
 using ApiStudio.Application.Authentication.Commands.Login;
 using ApiStudio.Application.Authentication.Commands.ProvisionUser;
-using ApiStudio.Application.Authentication.Dtos;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using ApiStudio.Api.Models.Requests.Login;

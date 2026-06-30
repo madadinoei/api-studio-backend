@@ -1,5 +1,5 @@
 ﻿using ApiStudio.Application.ApiRequests.Dtos;
-using ApiStudio.Application.Workspaces.Queries.GetWorkspaceById;
+using ApiStudio.Application.Workspaces.Dtos;
 using MediatR;
 
 namespace ApiStudio.Application.ApiRequests.Queries.GetApiRequestById;

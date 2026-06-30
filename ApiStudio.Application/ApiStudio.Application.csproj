@@ -11,6 +11,10 @@
     <ProjectReference Include="..\ApiStudio.HttpEngine.Abstractions\ApiStudio.HttpEngine.Abstractions.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Workspaces\Queries\" />
+  </ItemGroup>
+
   <PropertyGroup>
     <TargetFramework>net9.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>

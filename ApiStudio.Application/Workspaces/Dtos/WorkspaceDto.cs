@@ -1,4 +1,4 @@
-﻿namespace ApiStudio.Application.Workspaces.Queries.GetWorkspaceById;
+﻿namespace ApiStudio.Application.Workspaces.Dtos;
 
 public sealed class WorkspaceDto
 {
