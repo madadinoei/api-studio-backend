@@ -1,7 +1,7 @@
 ﻿using ApiStudio.Application.Authentication.Dtos;
 using ApiStudio.Application.Authentication.Interfaces;
 
-namespace ApiStudio.Infrastructure.Authentication;
+namespace ApiStudio.Infrastructure.Authentication.Services;
 
 public sealed class AuthenticationService
     : IAuthenticationService

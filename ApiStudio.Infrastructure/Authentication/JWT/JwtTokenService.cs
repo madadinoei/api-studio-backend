@@ -3,6 +3,7 @@ using System.Security.Claims;
 using System.Text;
 using ApiStudio.Application.Authentication.Dtos;
 using ApiStudio.Application.Authentication.Interfaces;
+using ApiStudio.Infrastructure.Authentication.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;

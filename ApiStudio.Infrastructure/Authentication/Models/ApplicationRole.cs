@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 
-namespace ApiStudio.Infrastructure;
+namespace ApiStudio.Infrastructure.Authentication.Models;
 
 public sealed class ApplicationRole : IdentityRole<Guid>
 {

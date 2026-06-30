@@ -2,10 +2,11 @@
 using ApiStudio.Application.Authentication.Models;
 using ApiStudio.Application.Common.Interfaces;
 using ApiStudio.Domain.Entities.Identity;
+using ApiStudio.Infrastructure.Authentication.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
-namespace ApiStudio.Infrastructure.Authentication;
+namespace ApiStudio.Infrastructure.Authentication.Services;
 
 public sealed class UserProvisioningService : IUserProvisioningService
 {

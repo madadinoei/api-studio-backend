@@ -1,7 +1,7 @@
 ﻿using ApiStudio.Application.Common.Interfaces;
 using ApiStudio.Domain.Entities;
 using ApiStudio.Domain.Entities.Identity;
-using ApiStudio.Infrastructure;
+using ApiStudio.Infrastructure.Authentication.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 

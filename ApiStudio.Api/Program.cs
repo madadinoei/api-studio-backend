@@ -7,8 +7,6 @@ using Microsoft.EntityFrameworkCore;
 using FluentValidation;
 using ApiStudio.Application.Authentication.Interfaces;
 using ApiStudio.Infrastructure.ActiveDirectory;
-using ApiStudio.Infrastructure.Authentication;
-using ApiStudio.Infrastructure;
 using Microsoft.AspNetCore.Identity;
 using ApiStudio.Infrastructure.Authentication.JWT;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -16,6 +14,8 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using ApiStudio.Api;
+using ApiStudio.Infrastructure.Authentication.Services;
+using ApiStudio.Infrastructure.Authentication.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
