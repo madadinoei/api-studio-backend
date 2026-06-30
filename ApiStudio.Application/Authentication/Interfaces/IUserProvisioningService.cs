@@ -9,7 +9,7 @@ namespace ApiStudio.Application.Authentication.Interfaces
 {
     public interface IUserProvisioningService
     {
-        Task ProvisionAsync(
+        Task<Guid> ProvisionAsync(
             AuthenticationUser user,
             CancellationToken cancellationToken);
     }

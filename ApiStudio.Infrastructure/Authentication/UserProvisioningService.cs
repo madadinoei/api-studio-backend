@@ -20,7 +20,7 @@ public sealed class UserProvisioningService : IUserProvisioningService
         _context = context;
     }
 
-    public async Task ProvisionAsync(
+    public async Task<Guid> ProvisionAsync(
         AuthenticationUser externalUser,
         CancellationToken cancellationToken)
     {
@@ -94,5 +94,6 @@ public sealed class UserProvisioningService : IUserProvisioningService
         }
 
         await _context.SaveChangesAsync(cancellationToken);
+        return identityUser.Id;
     }
 }

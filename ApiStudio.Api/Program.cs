@@ -1,3 +1,4 @@
+using System.Text;
 using ApiStudio.Application.Common.Interfaces;
 using ApiStudio.Application.Workspaces.Commands;
 using ApiStudio.HttpEngine;
@@ -7,36 +8,20 @@ using FluentValidation;
 using ApiStudio.Application.Authentication.Interfaces;
 using ApiStudio.Infrastructure.ActiveDirectory;
 using ApiStudio.Infrastructure.Authentication;
-using Microsoft.Extensions.Configuration;
 using ApiStudio.Infrastructure;
 using Microsoft.AspNetCore.Identity;
+using ApiStudio.Infrastructure.Authentication.JWT;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.Configuration;
+using Microsoft.IdentityModel.Tokens;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-// Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
-builder.Services.AddDbContext<ApplicationDbContext>(options =>
-{
-    options.UseSqlServer(
-        builder.Configuration.GetConnectionString("DefaultConnection"));
-});
-builder.Services
-    .AddIdentity<ApplicationUser, ApplicationRole>()
-    .AddEntityFrameworkStores<ApplicationDbContext>()
-    .AddDefaultTokenProviders();
+AddDatabaseContext(builder);
 
-builder.Services.Configure<ActiveDirectoryOptions>(
-    builder.Configuration.GetSection(ActiveDirectoryOptions.SectionName));
-
-builder.Services.AddScoped<IExternalAuthenticationProvider,
-    ActiveDirectoryAuthenticationProvider>();
-
-builder.Services.AddScoped<IApplicationDbContext>(sp =>
-    sp.GetRequiredService<ApplicationDbContext>());
-
-
-builder.Services.AddScoped<IUserProvisioningService, UserProvisioningService>();
+AuthenticationConfigs(builder);
 
 builder.Services.AddMediatR(cfg =>
 {
@@ -45,12 +30,8 @@ builder.Services.AddMediatR(cfg =>
 
 
 builder.Services.AddValidatorsFromAssembly(typeof(CreateWorkspaceValidator).Assembly);
-builder.Services.AddControllers();
 
-builder.Services.AddMediatR(cfg =>
-{
-    cfg.RegisterServicesFromAssembly(typeof(CreateWorkspaceCommand).Assembly);
-});
+builder.Services.AddControllers();
 
 builder.Services.AddHttpEngine();
 
@@ -66,8 +47,6 @@ builder.Services.AddCors(options =>
         });
 });
 
-
-
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -78,4 +57,67 @@ if (app.Environment.IsDevelopment())
 app.MapControllers();
 app.UseHttpsRedirection();
 app.UseCors("AllowFrontend");
+app.UseAuthentication();
+
+app.UseAuthorization();
 app.Run();
+
+void AddDatabaseContext(WebApplicationBuilder webApplicationBuilder)
+{
+    webApplicationBuilder.Services.AddDbContext<ApplicationDbContext>(options =>
+    {
+        options.UseSqlServer(
+            webApplicationBuilder.Configuration.GetConnectionString("DefaultConnection"));
+    });
+    webApplicationBuilder.Services
+        .AddIdentity<ApplicationUser, ApplicationRole>()
+        .AddEntityFrameworkStores<ApplicationDbContext>()
+        .AddDefaultTokenProviders();
+
+    webApplicationBuilder.Services.AddScoped<IApplicationDbContext>(sp =>
+        sp.GetRequiredService<ApplicationDbContext>());
+
+    webApplicationBuilder.Services.AddScoped<IAuthenticationService, AuthenticationService>();
+
+
+    
+
+}
+
+void AuthenticationConfigs(WebApplicationBuilder webAppbuilder)
+{
+    webAppbuilder.Services.Configure<ActiveDirectoryOptions>(
+        webAppbuilder.Configuration.GetSection(ActiveDirectoryOptions.SectionName));
+
+    webAppbuilder.Services.AddScoped<IExternalAuthenticationProvider,
+        ActiveDirectoryAuthenticationProvider>();
+
+    webAppbuilder.Services.AddScoped<IUserProvisioningService, UserProvisioningService>();
+    webAppbuilder.Services.Configure<JwtOptions>(
+        webAppbuilder.Configuration.GetSection(JwtOptions.SectionName));
+    webAppbuilder.Services.AddScoped<IJwtTokenService, JwtTokenService>();
+
+
+    webAppbuilder.Services
+        .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+        .AddJwtBearer(options =>
+        {
+            options.TokenValidationParameters = new TokenValidationParameters
+            {
+                ValidateIssuer = true,
+                ValidateAudience = true,
+                ValidateLifetime = true,
+                ValidateIssuerSigningKey = true,
+
+                ValidIssuer = builder.Configuration["Jwt:Issuer"],
+                ValidAudience = builder.Configuration["Jwt:Audience"],
+
+                IssuerSigningKey =
+                    new SymmetricSecurityKey(
+                        Encoding.UTF8.GetBytes(
+                            builder.Configuration["Jwt:SecretKey"]!))
+            };
+        });
+
+    builder.Services.AddAuthorization();
+}
