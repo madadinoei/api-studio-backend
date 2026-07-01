@@ -103,7 +103,7 @@ namespace ApiStudio.Persistence.Services
                                 Id = Guid.NewGuid(),
                                 Name = "Get All",
                                 Type = TreeNodeType.Request.ToString().ToLower(),
-                                Method = "get",
+                                Method = "GET",
                                 RequestId = String.Empty,
                                 Expanded = true,
                                 Children = []

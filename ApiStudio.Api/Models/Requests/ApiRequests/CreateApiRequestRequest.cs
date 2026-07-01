@@ -14,4 +14,5 @@ public sealed class CreateApiRequestRequest
     public List<QueryParameterDto>? QueryParameters { get; set; }
     public RequestBodyDto? RequestBodyDto { get; set; }
     public Guid? FolderId { get; set; }
+    public Guid CollectionId { get; set; }
 }

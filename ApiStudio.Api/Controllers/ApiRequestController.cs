@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace ApiStudio.Api.Controllers;
 
 [ApiController]
-[Route("api/apirequests")]
+[Route("api/requests")]
 public class ApiRequestController : ControllerBase
 {
     private readonly IMediator _mediator;
@@ -19,14 +19,12 @@ public class ApiRequestController : ControllerBase
         _mediator = mediator;
     }
 
-    [HttpPost("{collectionId:guid}")]
-    public async Task<IActionResult> CreateRequest(
-        Guid collectionId,
-        CreateApiRequestRequest request)
+    [HttpPost]
+    public async Task<IActionResult> CreateRequest(CreateApiRequestRequest request)
     {
         var id = await _mediator.Send(
             new CreateApiRequestCommand(
-                collectionId,request.FolderId,
+                request.CollectionId,request.FolderId,
                 request.Name,
                 request.Endpoint,
                 request.Method,request.RequestBodyDto,request.Headers,request.QueryParameters));
