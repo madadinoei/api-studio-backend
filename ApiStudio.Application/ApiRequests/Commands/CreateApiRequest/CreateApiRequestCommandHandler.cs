@@ -1,5 +1,6 @@
 ﻿using ApiStudio.Application.Common.Interfaces;
 using ApiStudio.Domain.Entities;
+using ApiStudio.Domain.Enums;
 using ApiStudio.Domain.ValueObjects;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -26,11 +27,14 @@ public sealed class CreateApiRequestCommandHandler
         if (collection is null)
             throw new KeyNotFoundException("Collection not found.");
 
+
+        Enum.TryParse(request.Body?.Type.ToPascalCase(), out BodyType requestBodyType);
+
         var apiRequest = ApiRequest.Create(
             request.CollectionId,request.FolderId,
             request.Name,
             request.Method,
-            Endpoint.Create(request.Endpoint));
+            Endpoint.Create(request.Endpoint), requestBodyType, request.Body.Content);
         foreach (var header in request.Headers)
         {
             apiRequest.AddHeader(

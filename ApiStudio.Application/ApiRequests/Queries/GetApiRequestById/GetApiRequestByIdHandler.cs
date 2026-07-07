@@ -3,6 +3,7 @@ using ApiStudio.Application.ApiRequests.Queries.GetApiRequestById;
 using ApiStudio.Application.Common.Interfaces;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using System.Linq;
 
 namespace ApiStudio.Application.Workspaces.Queries.GetWorkspaceById;
 
@@ -28,11 +29,11 @@ public class GetApiRequestByIdHandler
                 Id = x.Id,
                 CollectionId = x.CollectionId,
                 Name = x.Name,
-                Method = x.Method,
+                Method = x.Method.ToString(),
                 Endpoint = x.Endpoint.Value,
 
                 Body = new RequestBodyDto(
-                    x.Body.Type,
+                    x.Body.Type.ToString(),
                     x.Body.Content),
 
                 Headers = x.Headers

@@ -1,4 +1,5 @@
 ﻿using ApiStudio.Domain.Common;
+using ApiStudio.Domain.Enums;
 using ApiStudio.Domain.ValueObjects;
 
 namespace ApiStudio.Domain.Entities;
@@ -36,7 +37,7 @@ public class ApiRequest : BaseEntity
         Guid collectionId,Guid? folderId,
         string name,
         string method,
-        Endpoint endpoint)
+        Endpoint endpoint,BodyType bodyType,string? bodyContent)
     {
         Enum.TryParse(method, out HttpMethodType methodType);
 
@@ -48,7 +49,7 @@ public class ApiRequest : BaseEntity
             Name = name,
             Method = methodType,
             Endpoint = endpoint,
-            Body = RequestBody.Empty(),
+            Body =  RequestBody.Create(bodyType,bodyContent),
             CreatedAt = DateTime.UtcNow
         };
     }

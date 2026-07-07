@@ -27,7 +27,7 @@ public class ApiRequestController : ControllerBase
                 request.CollectionId,request.FolderId,
                 request.Name,
                 request.Endpoint,
-                request.Method,request.RequestBodyDto,request.Headers,request.QueryParameters));
+                request.Method,request.Body,request.Headers,request.QueryParameters));
 
         return CreatedAtAction(
             nameof(Get),

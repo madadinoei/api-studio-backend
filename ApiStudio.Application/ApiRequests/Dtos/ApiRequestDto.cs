@@ -10,7 +10,7 @@ public sealed class ApiRequestDto
 
     public string Name { get; init; } = default!;
 
-    public HttpMethodType Method { get; init; }
+    public string Method { get; init; }
 
     public string Endpoint { get; init; } = default!;
 

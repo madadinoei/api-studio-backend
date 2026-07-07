@@ -12,7 +12,7 @@ public sealed class CreateApiRequestRequest
     public string Method { get; set; }
     public List<RequestHeaderDto>? Headers { get; set; }
     public List<QueryParameterDto>? QueryParameters { get; set; }
-    public RequestBodyDto? RequestBodyDto { get; set; }
+    public RequestBodyDto? Body { get; set; }
     public Guid? FolderId { get; set; }
     public Guid CollectionId { get; set; }
 }

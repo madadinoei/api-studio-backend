@@ -3,5 +3,5 @@
 namespace ApiStudio.Application.ApiRequests.Dtos;
 
 public sealed record RequestBodyDto(
-    BodyType Type,
+    string Type,
     string? Content);
