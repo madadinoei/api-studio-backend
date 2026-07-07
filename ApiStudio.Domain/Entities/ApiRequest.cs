@@ -35,16 +35,18 @@ public class ApiRequest : BaseEntity
     public static ApiRequest Create(
         Guid collectionId,Guid? folderId,
         string name,
-        HttpMethodType method,
+        string method,
         Endpoint endpoint)
     {
+        Enum.TryParse(method, out HttpMethodType methodType);
+
         return new ApiRequest
         {
             Id = Guid.NewGuid(),
             CollectionId = collectionId,
             FolderId = folderId,
             Name = name,
-            Method = method,
+            Method = methodType,
             Endpoint = endpoint,
             Body = RequestBody.Empty(),
             CreatedAt = DateTime.UtcNow
@@ -59,7 +61,7 @@ public class ApiRequest : BaseEntity
     public void RemoveHeader(string name)
     {
         _headers.RemoveAll(x =>
-            x.Name.Equals(name, StringComparison.OrdinalIgnoreCase));
+            x.Key.Equals(name, StringComparison.OrdinalIgnoreCase));
     }
 
     public void ReplaceHeaders(IEnumerable<RequestHeader> headers)

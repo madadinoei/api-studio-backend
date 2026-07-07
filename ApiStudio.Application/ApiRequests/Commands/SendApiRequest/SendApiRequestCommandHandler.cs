@@ -66,7 +66,7 @@ public sealed class SendApiRequestCommandHandler
 
             Headers = request.Headers
                 .Select(x => new HttpHeader(
-                    x.Name,
+                    x.Key,
                     x.Value,
                     x.Enabled))
                 .ToList(),

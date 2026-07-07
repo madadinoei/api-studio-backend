@@ -53,7 +53,7 @@ internal class ApiRequestConfiguration : IEntityTypeConfiguration<ApiRequest>
 
             header.HasKey("Id");
 
-            header.Property(x => x.Name)
+            header.Property(x => x.Key)
                 .HasMaxLength(200);
 
             header.Property(x => x.Value)

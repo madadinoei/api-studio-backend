@@ -9,7 +9,7 @@ public sealed class CreateApiRequestRequest
 
     public string Endpoint { get; set; } = string.Empty;
 
-    public HttpMethodType Method { get; set; }
+    public string Method { get; set; }
     public List<RequestHeaderDto>? Headers { get; set; }
     public List<QueryParameterDto>? QueryParameters { get; set; }
     public RequestBodyDto? RequestBodyDto { get; set; }

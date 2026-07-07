@@ -2,7 +2,7 @@
 
 public sealed record RequestHeader
 {
-    public string Name { get; }
+    public string Key { get; }
 
     public string Value { get; }
 
@@ -12,9 +12,9 @@ public sealed record RequestHeader
     {
     }
 
-    private RequestHeader(string name, string value, bool enabled)
+    private RequestHeader(string key, string value, bool enabled)
     {
-        Name = name;
+        Key = key;
         Value = value;
         Enabled = enabled;
     }

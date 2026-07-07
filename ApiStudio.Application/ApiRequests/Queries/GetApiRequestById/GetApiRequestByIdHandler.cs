@@ -37,7 +37,7 @@ public class GetApiRequestByIdHandler
 
                 Headers = x.Headers
                     .Select(h => new RequestHeaderDto(
-                        h.Name,
+                        h.Key,
                         h.Value,
                         h.Enabled))
                     .ToList(),

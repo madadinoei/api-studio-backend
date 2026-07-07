@@ -72,22 +72,10 @@ namespace ApiStudio.Persistence.Services
                     {
                         Id = x.Id,
                         Name = x.Name,
-                        Type = TreeNodeType.Folder.ToString().ToLower()
-                    });
-                var rootNodes = new List<TreeNodeDto>()
-                {
-                    new()
-                    {
-
-                        Id = Guid.NewGuid(),
-                        Name = "Get Madadi",
-                        Type = TreeNodeType.Request.ToString().ToLower(),
-                        Method = "PUT",
-                        RequestId = String.Empty,
-                        Expanded = true,
+                        Type = TreeNodeType.Folder.ToString().ToLower(),
                         Children = []
-                    }
-                };
+                    });
+                var rootNodes = new List<TreeNodeDto>();
 
                 foreach (var folder in folders)
                 {
@@ -95,30 +83,14 @@ namespace ApiStudio.Persistence.Services
 
                     if (folder.ParentFolderId == null)
                     {
-                        node.Children =
-                        [
-                            new TreeNodeDto()
-                            {
-
-                                Id = Guid.NewGuid(),
-                                Name = "Get All",
-                                Type = TreeNodeType.Request.ToString().ToLower(),
-                                Method = "GET",
-                                RequestId = String.Empty,
-                                Expanded = true,
-                                Children = []
-                            }
-
-                        ];
+                        node.Children = [];
                         rootNodes.Add(node);
 
                     }
                     else if (folderLookup.TryGetValue(folder.ParentFolderId.Value, out var parent))
                     {
                         parent.Children.Add(node);
-                        
                     }
-
                 }
 
                 foreach (var request in requests)
@@ -127,18 +99,34 @@ namespace ApiStudio.Persistence.Services
                     {
                         Id = request.Id,
                         Name = request.Name,
-                        Type = TreeNodeType.Request.ToString(),
+                        Type = TreeNodeType.Request.ToString().ToLower(),
+                        Method = request.Method.ToString().ToUpper(),
+                        Expanded = true,
+                        RequestId = request.Id.ToString(),
+                        Children = []
                     };
 
                     if (request.FolderId == null)
                     {
                         rootNodes.Add(node);
                     }
-                    else if (folderLookup.TryGetValue(request.FolderId.Value, out var folder))
+                    else
                     {
-                        folder.Children.Add(node);
-                        
+                        // اگر شناسه فولدر داشت، آن را در دیکشنری فولدرها پیدا کرده و به لیست فرزندانش اضافه می‌کنیم
+                        if (folderLookup.TryGetValue(request.FolderId.Value, out var parentFolder))
+                        {
+                            parentFolder.Children.Add(node);
+                        }
+                        else
+                        {
+                            // در صورتی که به هر دلیلی فولدر والد پیدا نشد (مثلا خطای دیتابیسی یا حذف منطقی)
+                            // تصمیم با شماست؛ می‌توانید آن را به ریشه اضافه کنید یا نادیده بگیرید.
+                            rootNodes.Add(node);
+                        }
+
+
                     }
+                    
                 }
                 var dto = new CollectionTreeDto
                 {

@@ -35,7 +35,7 @@ public sealed class CreateApiRequestCommandHandler
         {
             apiRequest.AddHeader(
                 RequestHeader.Create(
-                    header.Name,
+                    header.Key,
                     header.Value,
                     header.Enabled));
         }

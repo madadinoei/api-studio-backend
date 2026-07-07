@@ -9,7 +9,7 @@ public sealed record CreateApiRequestCommand(
     Guid? FolderId,
     string Name,
     string Endpoint,
-    HttpMethodType Method,
+    string Method,
     RequestBodyDto? Body,
     List<RequestHeaderDto>? Headers,
     List<QueryParameterDto>? QueryParameters
